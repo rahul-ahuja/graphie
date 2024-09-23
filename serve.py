@@ -56,6 +56,7 @@ async def travel(city: City):
     logger.info(f"Received travel request from {city.source_city_name} to {city.target_city_name}")
 
 
+
         # Cypher query to check if both cities exist
     check_cities_cypher = '''
         MATCH (source:City {name: $city.source_city_name}), (target:City {name: $target_name})
@@ -64,9 +65,10 @@ async def travel(city: City):
 
     #HTTP Exception error handling raise HTTPException(status_code=404, detail="One or both cities not found in the database.")
     
+    output = calculate_shortest_path(city.source_city_name, city.target_city_name)
 
     #pydantic output response
-    response = {"optimal_path": city.source_city_name} 
+    response = {"optimal_path": str(output)} 
 
     return response
 
