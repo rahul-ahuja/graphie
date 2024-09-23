@@ -19,6 +19,9 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Load using igraph's pickle method
+loaded_graph = igraph.Graph.Read_Pickle('graph_dir/graph_igraph.pkl')
+
 
 # Define the input data schema
 class City(BaseModel):
