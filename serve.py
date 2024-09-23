@@ -4,6 +4,7 @@ import pandas as pd
 import igraph
 from neo4j import GraphDatabase
 from pydantic import BaseModel, Field
+from graph_dir import calculate_shortest_path
 
 import logging
 
