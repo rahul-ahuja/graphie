@@ -3,7 +3,7 @@ import igraph
     # Load using igraph's pickle method
 loaded_graph = igraph.Graph.Read_Pickle('graph_igraph.pkl')
 
-def shortest_path(departature: str, destination: str, g: igraph = loaded_graph):
+def shortest_path(departature: str, destination: str, g: igraph = loaded_graph) -> tuple:
     source = g.vs.select(city_names_eq=departature)
     target = g.vs.select(city_names_eq=destination)
     shortest_path = g.get_shortest_paths(source[0], target[0], weights='travel_time')
