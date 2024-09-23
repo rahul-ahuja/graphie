@@ -68,10 +68,10 @@ async def travel(city: City):
 
     #HTTP Exception error handling raise HTTPException(status_code=404, detail="One or both cities not found in the database.")
     
-    output = shortest_path(departature = "Abbotsford, BC", destination = "Akron/Canton, OH", g = loaded_graph)
-
+    city_path, path_distances, travel_time = shortest_path(departature = "Abbotsford, BC", destination = "Akron/Canton, OH", g = loaded_graph)
+    
     #pydantic output response
-    response = {"optimal_path": str(output)} 
+    response = {"optimal_path": str(city_path)} 
 
     return response
 
