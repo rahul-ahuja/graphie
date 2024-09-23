@@ -4,7 +4,7 @@ import pandas as pd
 import igraph
 from neo4j import GraphDatabase
 from pydantic import BaseModel, Field
-from graph_dir import calculate_shortest_path
+from graph_dir.calculate_shortest_path import shortest_path
 
 import logging
 
@@ -68,7 +68,7 @@ async def travel(city: City):
 
     #HTTP Exception error handling raise HTTPException(status_code=404, detail="One or both cities not found in the database.")
     
-    output = calculate_shortest_path(city.source_city_name, city.target_city_name)
+    output = shortest_path(departature = "Abbotsford, BC", destination = "Akron/Canton, OH", g = loaded_graph)
 
     #pydantic output response
     response = {"optimal_path": str(output)} 

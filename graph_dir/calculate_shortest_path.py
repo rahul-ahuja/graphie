@@ -14,3 +14,5 @@ def shortest_path(departature: str, destination: str, g: igraph) -> tuple:
         shortest_path_city.append(g.vs.select(city_ids_eq=shortest_path[city_idx])[0]['city_names'])
 
     return shortest_path_city, short_path_distances, shortest_travel_time
+
+#print(shortest_path("San Diego, CA", "Abbotsford, BC"))
