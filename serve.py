@@ -50,7 +50,7 @@ def shutdown():
         driver.close()  # Close the Neo4j connection gracefully
 
 @app.post('/path', response_model=RecommendationResponse, tags=["Recommendation endpoint"])
-async def travel(city: City):
+def travel(city: City):
     """
     Endpoint for getting the optimal travel path \n
     Enter in the Request body the names of the departure city and destination city
@@ -68,10 +68,18 @@ async def travel(city: City):
 
     #HTTP Exception error handling raise HTTPException(status_code=404, detail="One or both cities not found in the database.")
     
-    city_path, path_distances, travel_time = shortest_path(departature = "Abbotsford, BC", destination = "Akron/Canton, OH", g = loaded_graph)
+    city_path, path_travel_time, total_travel_time = shortest_path(departature = city.source_city_name, destination = city.target_city_name, g = loaded_graph)
     
+    path_description = ""
+    source_city = city_path[0]
+    for city, travel_time in zip(city_path[1:], path_travel_time):
+        path_description += f"It takes {travel_time} mins from {source_city} to {city} \n    "
+        source_city = city 
+
+    path_description += f"Total journey time will be {total_travel_time} mins."
+
     #pydantic output response
-    response = {"optimal_path": str(city_path)} 
+    response = {"optimal_path": path_description} 
 
     return response
 
