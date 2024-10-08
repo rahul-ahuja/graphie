@@ -2,6 +2,10 @@ import igraph
 
 
 def shortest_path(departature: str, destination: str, g: igraph) -> tuple:
+    """Function to get the Shortest path using Djsktra algorithm
+    Params: Departing city node name, destination city name and pickled graph
+    returns: list of cities in the path, list of times to cities, and sum of the total time"""
+    
     source = g.vs.select(city_names_eq=departature)
     target = g.vs.select(city_names_eq=destination)
     shortest_path = g.get_shortest_paths(source[0], target[0], weights='travel_time')[0]
@@ -14,5 +18,3 @@ def shortest_path(departature: str, destination: str, g: igraph) -> tuple:
         shortest_path_city.append(g.vs.select(city_ids_eq=shortest_path[city_idx])[0]['city_names'])
 
     return shortest_path_city, short_path_distances, shortest_travel_time
-
-#print(shortest_path("San Diego, CA", "Abbotsford, BC"))

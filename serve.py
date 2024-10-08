@@ -2,7 +2,6 @@ from fastapi import FastAPI, Query, HTTPException
 import uvicorn
 import pandas as pd
 import igraph
-from neo4j import GraphDatabase
 from pydantic import BaseModel, Field
 from graph_dir.calculate_shortest_path import shortest_path
 
@@ -34,20 +33,6 @@ class RecommendationResponse(BaseModel):
     optimal_path: str = Field(description="Gives out the optimal path with cities and time")
 
 
-# FastAPI lifecycle events
-# Global Neo4j driver
-driver = None
-
-@app.on_event("startup")
-def startup():
-    global driver
-    # Initialize the Neo4j driver
-    driver = GraphDatabase.driver(uri='bolt://localhost:7687', auth=('neo4j', 'password'))
-
-@app.on_event("shutdown")
-def shutdown():
-    if driver:
-        driver.close()  # Close the Neo4j connection gracefully
 
 @app.post('/path', response_model=RecommendationResponse, tags=["Recommendation endpoint"])
 def travel(city: City):
@@ -60,13 +45,14 @@ def travel(city: City):
 
 
 
-        # Cypher query to check if both cities exist
-    check_cities_cypher = '''
-        MATCH (source:City {name: $city.source_city_name}), (target:City {name: $target_name})
-        RETURN source, target
-    '''
+        # query to check if both cities exist
+    try:
+        loaded_graph.vs.select(city_names_eq=city.source_city_name)[0] 
+        loaded_graph.vs.select(city_names_eq=city.target_city_name)[0]
+    except IndexError:     #HTTP Exception error handling 
+        raise HTTPException(status_code=404, detail="One or both cities not found in the graph.")
 
-    #HTTP Exception error handling raise HTTPException(status_code=404, detail="One or both cities not found in the database.")
+
     
     city_path, path_travel_time, total_travel_time = shortest_path(departature = city.source_city_name, destination = city.target_city_name, g = loaded_graph)
     
@@ -76,15 +62,14 @@ def travel(city: City):
         path_description += f"It takes {travel_time} mins from {source_city} to {city} \n    "
         source_city = city 
 
+    logger.info(f"API outputs {path_description}")
+
     path_description += f"Total journey time will be {total_travel_time} mins."
 
     #pydantic output response
     response = {"optimal_path": path_description} 
 
     return response
-
-
-
 
 
 if __name__ == "__main__":
