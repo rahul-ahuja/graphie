@@ -1,4 +1,4 @@
-# durham_graph
+# Graphie
 
 # 1. Folder Structure
 
