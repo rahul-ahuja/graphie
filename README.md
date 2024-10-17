@@ -1,4 +1,4 @@
-# Durham_graph presentation project
+# Graph presentation project
 
 # 1. Folder Structure
 
