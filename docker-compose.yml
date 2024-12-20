@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: .
+    working_dir: /app/frontend  # Set working directory to frontend
+    command: streamlit run client.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+    networks:
+      - app
+    container_name: frontend
+
+  backend:
+    build:
+      context: .
+    working_dir: /app/backend  # Set working directory to backend
+    command: uvicorn serve:app --host 0.0.0.0 --port 8000  # Correct path to serve.py
+    ports:
+      - 8000:8000
+    networks:
+      - app
+    container_name: backend
+
+networks:
+  app:
+    driver: bridge

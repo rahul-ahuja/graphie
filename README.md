@@ -37,34 +37,24 @@ conda activate graph_durham
 ```
 
 
-# 4. Run the App Serving
+# 4. Run the App Serving from the project directory
 
 ``` 
-uvicorn serve:app
+uvicorn backend.serve:app --host 0.0.0.0 --port 8000 & streamlit run frontend/client.py --server.port 8501 --server.address 0.0.0.0
 ```
 
 # 5. (Optionally) Run the app on the Docker. Docker enables us to run the app on any platform without requiring specific configuration
 
 ```
-docker pull 785854/graphie:latest
-docker run -d --name mlapp -p 8000:8000 785854/graphie:latest
+docker pull 785854/graphie-frontend:latest
+docker pull 785854/graphie-backend:latest
+docker-compose up
 ```
 
-# 6. Test the FastAPI on the localhost with port number as below; This will direct you to the Swagger UI for the API testing
-
-```
-http://127.0.0.1:8000/docs
-
-Example cities;
-"San Diego, CA"
-"St. Johns, NL"
-"Washington, DC"
-```
-
-# 7. (Optional) To run the unit test on the data, 
+# 6. (Optional) To run the unit test on the data, 
 ```
 pytest  #run on the main directory
 ```
 
-# 8. Further work
+# 7. Further work
 `Raise a Github Issue for any issues`
