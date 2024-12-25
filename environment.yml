@@ -1,4 +1,4 @@
-name: graph_durham
+name: graphie
 channels:
   - defaults
 dependencies:
