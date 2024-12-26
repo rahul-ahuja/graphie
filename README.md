@@ -6,7 +6,13 @@
 ├── data
 │   ├── Data analysis.ipynb  
 │   ├── reachability-meta.csv
-│   ├── reachability.csv   
+│   ├── reachability.csv
+│   ├── # Demonstration files
+├── backend   
+│   ├── serve.py            # serving the app on FastAPI
+│   ├── app.log            # logging the HTTP requests and response
+├── frontend   
+│   ├── client.py           # user interface streamlit
 ├── graph_dir
 │   ├── build_graph.py          # script to serialize graph
 │   ├── calculate_shortest_path        # script to calculate shortest optimal path
@@ -16,8 +22,7 @@
 │   ├── conftest.py    # configuring the tests that is reading the data 
 │   ├── test_data.py     # test to validate the data
 ├── Dockerfile         # To build the docker image
-├── app.log            # logging the HTTP requests and response
-├── server.py          # serving the app on FastAPI
+├── docker-compose.yml         # To build the docker image
 ├── requirements.txt   # packages to be installed
 ├── README.md          
 ├── environment.yml    # conda environment to setup the python environment
