@@ -10,7 +10,6 @@
 │   ├── # Demonstration files
 ├── backend   
 │   ├── serve.py            # serving the app on FastAPI
-│   ├── app.log            # logging the HTTP requests and response
 ├── frontend   
 │   ├── client.py           # user interface streamlit
 ├── graph_dir
@@ -26,6 +25,7 @@
 ├── requirements.txt   # packages to be installed
 ├── README.md          
 ├── environment.yml    # conda environment to setup the python environment
+├── app.log            # logging the HTTP requests and response
 └── .gitignore          # files to ignore during commits
 ```
 
