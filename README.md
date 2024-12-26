@@ -38,7 +38,7 @@ This is Web interface to find the optimal path from the departature city to the 
 
 ```
 conda env create -f environment.yml
-conda activate graph_durham
+conda activate graph
 ```
 
 
