@@ -38,7 +38,7 @@ This is Web interface to find the optimal path from the departature city to the 
 
 ```
 conda env create -f environment.yml
-conda activate graphie
+conda activate graph
 ```
 
 
@@ -49,7 +49,7 @@ uvicorn backend.serve:app --host 0.0.0.0 --port 8000 & streamlit run frontend/cl
 ```
 4ii. Go to the browser and put the URL address http://0.0.0.0:8501/ to access the Streamlit app
 
-# 5. (Optionally) Run the app on the Docker. Docker enables us to run the app on any platform without requiring specific configuration
+# 5. (Optionally) Run the app on the Docker (version 27.0.3). Docker enables us to run the app on any platform without requiring specific configuration
 
 ```
 docker pull 785854/graphie-frontend:latest

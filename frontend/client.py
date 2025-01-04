@@ -28,7 +28,7 @@ city = {'source_city_name': departure_city, 'target_city_name': destination_city
 
 #when the user clicks on button it will fetch the API
 if st.button('Calculate'):
-    response = requests.post(url="http://127.0.0.1:8000/path", data= json.dumps(city))
+    response = requests.post(url="http://0.0.0.0:8000/path", data= json.dumps(city))
     # Extract the optimal path
     #optimal_path = response
 
