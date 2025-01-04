@@ -1,28 +1,28 @@
+version: '3.8'
+
 services:
   frontend:
-    build:
-      context: .
-    working_dir: /app  # Set working directory to frontend
-    command: streamlit run frontend/client.py --server.port 8501 --server.address 0.0.0.0
+    image: 785854/graphie-frontend:latest  # Use pre-built frontend image
+    working_dir: /app  # Correct working directory for frontend
+    command: streamlit run frontend/client.py --server.port 8501 --server.address 0.0.0.0  # Correct Streamlit command
     ports:
-      - 8501:8501
+      - "8501:8501"  # Expose port 8501 for frontend
     depends_on:
-      - backend
+      - backend  # Ensure backend is started before frontend
     networks:
       - app
     container_name: frontend
 
   backend:
-    build:
-      context: .
-    working_dir: /app  # Set working directory to backend
-    command: uvicorn backend.serve:app --host 0.0.0.0 --port 8000  # Correct path to serve.py
+    image: 785854/graphie-backend:latest  # Use pre-built backend image
+    working_dir: /app  # Correct working directory for backend
+    command: uvicorn backend.serve:app --host 0.0.0.0 --port 8000  # Correct FastAPI startup command
     ports:
-      - 8000:8000
+      - "8000:8000"  # Expose port 8000 for backend
     networks:
       - app
     container_name: backend
 
 networks:
   app:
-    driver: bridge
+    driver: bridge  # Use bridge network for communication between containers
