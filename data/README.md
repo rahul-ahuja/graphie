@@ -6,4 +6,6 @@
 python setup.py build_ext --inplace
 python profile_script.py
 ```
-Check out the Screenshot.png file display 
+
+Profiling Python's get_distance function 0.801099723000334
+Profiling C++ distance function 0.27820833899977515
