@@ -57,11 +57,11 @@ docker pull 785854/graphie-backend:latest
 docker-compose up
 ```
 
-# 6. (Optional) To run the unit test on the data, 
+# 6. (Optional) Run the tests 
 ```
 pytest  #run on the main directory
-black .
-ruff check .
+black . #format code
+ruff check . #run linter
 ```
 
 # 7. Further work
