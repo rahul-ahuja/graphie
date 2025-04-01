@@ -60,6 +60,8 @@ docker-compose up
 # 6. (Optional) To run the unit test on the data, 
 ```
 pytest  #run on the main directory
+black .
+ruff check .
 ```
 
 # 7. Further work
